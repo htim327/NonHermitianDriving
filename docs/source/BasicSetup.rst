@@ -777,6 +777,10 @@ The image below displays the results for the system where the target state is re
 
 .. image:: EntropyEliminatedRandomTargetStates.png
 
+Next, we have the system that is the exact same as that of the previous image except for the implementation of the correction unitary. The interesting aspect for this data is that the entropy of both of the registers is higher than the entropy of the first register in the image above and both of the entropies are exactly the same. It makes sense that both the entropies would be exactly the same because the information stored in the first register is required to eliminate the entropy in the second register, which is why the mystical sounding term 'entropic interference' is used.
+
 .. image:: NonEntropicInterferenceRandomTargetStates.png
+
+Finally, we display the data for the system that is essentially the qubits in the second register completely unacted upon by the qubits in the first register. It is shown that the total entropy of this system is exactly the same as the entropy of the first register for the system where the entropy is eliminated from the second register. In addition, the final line of data displays whether or not the state achieved in the second register using the entropic interference method is exactly the same as the target state we wish to evolve our system to.
 
 .. image:: QubitsUnactedUponRandomTargetStates.png
