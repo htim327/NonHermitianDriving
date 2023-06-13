@@ -776,3 +776,7 @@ Random target states
 The image below displays the results for the system where the target state is reached in the second register as a result of operations involving qubits in the first register. The image shows the the resulting entropy of the qubits in the second register is zero due to the fact that the qubits are guaranteed to be in their target states and all of the entropy has moved to the qubits in the first register. Just for general reference, the probabilities for each of the qubits to point in the spin up and down directions along the x, y, and z axes are printed after the entropy is displayed.
 
 .. image:: EntropyEliminatedRandomTargetStates.png
+
+.. image:: NonEntropicInterferenceRandomTargetStates.png
+
+.. image:: QubitsUnactedUponRandomTargetStates.png
