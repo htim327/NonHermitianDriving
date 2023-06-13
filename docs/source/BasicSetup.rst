@@ -769,3 +769,7 @@ Results
 =======
 
 Now we are going to present the output of this code, which serves as a proof that this code is doing what it is supposed to. These results are not presented in the corresponding paper because they do not make a significant contribution to the overall story. First we are going to present the data for the target states produced by a random number generator and then we are going to present the data for the case where the target states for all of the qubits are in the spin down state.
+
+Random target states
+--------------------
+
