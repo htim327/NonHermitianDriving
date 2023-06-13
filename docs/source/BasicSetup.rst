@@ -1,3 +1,4 @@
+================================================================
 Presenting the code for the basic setup of non-Hermitian driving
 ================================================================
 
@@ -551,3 +552,218 @@ The first part of this documentation gives the main MATLAB file along with expla
    else
        disp('The process of reaching the target state has been <strong>UNSUCCESSFUL</strong>')
    end
+
+For the helper functions, we will start with the function that obtains vectors that are orthogonal to the target state using the Gram-Schmidt process.
+
+.. code-block:: matlab
+
+    function [orthvec] = FindOrths(initorth,num)
+    % This algorithm produces a set of orthogonal vectors using the
+    % Gram–Schmidt process. initorth is set of pre-generated
+    % vectors, which can also be a completely empty vector if you don't have any use for any pre-generated vectors. num is the number of orthogonal vectors you wish to produce.
+    %%%
+    % initnum describes how many vectors make up initorth
+    initnum = size(initorth,2);
+    % normalize the first vector in initorth
+    if (initnum>0)
+       vecnow = initorth(:,1);
+       const = ctranspose(vecnow)*vecnow;
+       vecnow = vecnow/sqrt(const);
+       initorth(:,1) = vecnow;
+    end
+    % calculate how many more vectors you want to add
+    initadd = num - initnum;
+    % Generate additional vectors that will be used to construct vectors that
+    % are orthogonal to initorth and store them in orthtot
+    orthadd = -ones(num,initadd) + 2*rand(num,initadd) - 1i*ones(num,initadd) + 2i*rand(num,initadd);
+    orthtot = [initorth orthadd];
+    % Normalize the first vector of orthtot
+    vecnow = orthtot(:,1);
+    const = ctranspose(vecnow)*vecnow;
+    vecnow = vecnow/sqrt(const);
+    orthtot(:,1) = vecnow;
+    % Implement the Gram–Schmidt process
+    for i = 2:num
+       vecnow1 = orthtot(:,i);
+       for j = 1:(i-1)
+          uvec = orthtot(:,j);
+          vecnow1 = vecnow1 - ctranspose(uvec)*vecnow1/(ctranspose(uvec)*uvec)*uvec;
+       end
+       const = ctranspose(vecnow1)*vecnow1;
+       vecnow1 = vecnow1/sqrt(const);
+       orthtot(:,i) = vecnow1;
+    end
+    orthvec = orthtot;
+    end
+
+Then we have the function that generates the matrices that rotate the qubits from the target state to the orthogonal state and vice versa as well as the matrices that add a phase of negative one if the qubit is in the orthogonal state and leaves it alone if it is in the target state.
+
+.. code-block:: matlab
+
+    function [interference,rotation] = StateProcessing(tarstates)
+    % This function constructs the rotations that are applied to the qubits in
+    % the second register if the corresponding qubit in the first register is
+    % in the spin up state as well as the matrices that applies a phase of
+    % negative one to a qubit in the second register if it is in a state
+    % orthogonal to the target state.
+    dim = size(tarstates,3);
+    interferencea = zeros(2,2,dim);
+    rotationa = zeros(2,2,dim);
+    for i = 1:dim
+       vec1 = tarstates(:,1,i);
+       vec2 = tarstates(:,2,i);
+       interferencea(:,:,i) = interferencea(:,:,i) + vec1*ctranspose(vec1) - vec2*ctranspose(vec2);
+       rotationa(:,:,i) = rotationa(:,:,i) + vec1*ctranspose(vec2) + vec2*ctranspose(vec1);
+    end
+    interference = interferencea;
+    rotation = rotationa;
+    end
+
+The code below shows how noise using the Pauli channel is implemented.
+
+.. code-block:: matlab
+
+    function [densityf] = PauliKraus(densityi,indvec,size,prob,iter)
+    % This function implements noise using the Pauli channel. indvec describes
+    % the particular qubits that this noise is applied to, size describes the
+    % number of qubits defines the size of the system, prob describes the
+    % probabilities associated with implementing rotations defined by each of
+    % the Pauli matrices, and iter describes how many times the appropriate
+    % Kraus operator is implemented.
+    %%%
+    % Store the Pauli matrices as well as the identity matrix in sigies
+    sigies = zeros(2,2,4);
+    sigies(:,:,1) = [0 1; 1 0];
+    sigies(:,:,2) = [0 -1i; 1i 0];
+    sigies(:,:,3) = [1 0; 0 -1];
+    sigies(:,:,4) = [1 0; 0 1];
+    densityb = zeros(2^size);
+    % Iterate over all indices where the noise is applied
+    for i = 1:length(indvec)
+       kraussback = zeros(2^size,2^size,4);
+       % Iterate over all of the matrices within sigies
+       for j = 1:4
+          kraussshort = zeros(2,2,size);
+          % Iterate over all of the qubits
+          for k = 1:size
+                % If the qubit is supposed to have noise applied to it, apply
+                % noise to it, otherwise do nothing.
+                if (k==indvec(i))
+                   kraussshort(:,:,k) = sqrt(prob(j))*sigies(:,:,j);
+                else
+                   kraussshort(:,:,k) = [1 0; 0 1];
+                end
+          end
+          kraussnow = kron(kraussshort(:,:,1),kraussshort(:,:,2));
+          for k = 3:size
+                kraussnow = kron(kraussnow,kraussshort(:,:,k));
+          end
+          kraussback(:,:,j) = kraussnow;
+       end
+       % Apply the Kraus operators to the density matrix of interest
+       for j = 1:iter
+          for k = 1:4
+                densityb = densityb + kraussback(:,:,k)*densityi*ctranspose(kraussback(:,:,k));
+          end
+          densityb = densityb/trace(abs(densityb));
+          densityi = densityb;
+       end
+    end
+    densityf = densityb;
+    end
+
+The following code produces the correction unitary.
+
+.. code-block:: matlab
+
+    function [densityf] = SpinCorrection(densityi,nqubits,rotation)
+    % This function calculates the correction unitary that brings the qubits in
+    % the second register to the target state. densityi is the density matrix
+    % that we wish to apply the correction unitary to, nqubits is the number of
+    % qubits that compose the system described by this density matrix, and
+    % rotation describe the set of rotations that are applied to the qubits in
+    % the second register.
+    cormat = zeros(2^(2*nqubits),2^(2*nqubits));
+    % Iterate over all possible configurations that the qubits in the first
+    % register can be in
+    for i = 0:(2^nqubits-1)
+       const = dec2bin(i);
+       const2 = nqubits - length(const);
+       for j = 1:const2
+          const = ['0' const];
+       end
+       cormat2 = zeros(2,2,2^(2*nqubits));
+       % If a qubit in the first register is spin up, apply the appropriate
+       % rotation to the corresponding qubit in the second register, otherwise
+       % apply an identity matrix
+       for j = 1:nqubits
+          if (const(j)=='1')
+                cormat2(:,:,j) = [0 0; 0 1];
+                cormat2(:,:,j+nqubits) = rotation(:,:,j);
+          else
+                cormat2(:,:,j) = [1 0; 0 0];
+                cormat2(:,:,j+nqubits) = eye(2);
+          end
+       end
+       statemat = kron(cormat2(:,:,1),cormat2(:,:,2));
+       for j = 3:(2*nqubits)
+          statemat = kron(statemat,cormat2(:,:,j));
+       end
+       cormat = cormat + statemat;
+    end
+    % Apply the correction unitary to the density matrix given as input and
+    % return the result as densityf
+    densitynow = cormat*densityi*ctranspose(cormat);
+    densitynow = densitynow/trace(abs(densitynow));
+    densityf = densitynow;
+    end
+
+Finally, we have the code that calculates the reduced density matrix.
+
+.. code-block:: matlab
+
+    function [rdensity] = ReducedDensity(densityi,size,targets)
+    % This function calculates the reduced the reduced density matrix of the
+    % density matrix defined by the number of qubits given by size and where
+    % the particular reduced density matrix describes the qubits given by
+    % targets.
+    nq = length(targets);
+    nq2 = size - nq;
+    redden = zeros(2^nq);
+    for i = 0:(2^nq2-1)
+       const = dec2bin(i);
+       const2 = nq2 - length(const);
+       for j = 1:const2
+          const = ['0' const];
+       end
+       count = 0;
+       if sum(1==targets)
+          opmat = eye(2);
+       else
+          count = count+1;
+          if (const(count)=='1')
+                opmat = [0; 1];
+          else
+                opmat = [1; 0];
+          end
+       end
+       for j = 2:size
+          if sum(j==targets)
+                opmat = kron(opmat,eye(2));
+          else
+                count = count + 1;
+                if (const(count)=='1')
+                   opmat = kron(opmat,[0; 1]);
+                else
+                   opmat = kron(opmat,[1; 0]);
+                end
+          end
+       end
+       redden = redden + ctranspose(opmat)*densityi*opmat;
+    end
+    redden = redden/trace(abs(redden));
+    rdensity = redden;
+    end
+
+Results
+=======
