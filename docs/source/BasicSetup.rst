@@ -773,3 +773,4 @@ Now we are going to present the output of this code, which serves as a proof tha
 Random target states
 --------------------
 
+.. image:: EntropyEliminatedRandomTargetStates.png
