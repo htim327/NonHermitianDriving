@@ -788,8 +788,14 @@ Finally, we display the data for the system that is essentially the qubits in th
 All target states in the spin down state
 ----------------------------------------
 
+For this next set of data, we are going to look at what happens when we set all of the target states into the spin down state by setting the variable state to 'b'. First we are going to look at the data for the case where our algorithm brings the qubits in the second register into the spin down state.
+
 .. image:: EntropyEliminatedSpinDownTargetStates.png
 
+Next, we are going to look at the case where we implement all of the operations on the qubits in both registers with the exception of the implementation of the correction unitary. The interesting thing about this set of data is that the qubits in the first register have their relative probabilities maintained in the z-direction after having all of the controlled unitaries act on them, but the probabilities in the x and y directions are altered. This is an example of qubits that serve as control qubits being rotated about the z-axis such that there is equal probability of observing the qubits in the spin up and down x and y directions. This is similar to how the qubits would behave after being measured in the z direction.
+
 .. image:: NonEntropicInterferenceSpinDownTargetStates.png
+
+Finally, we have the system that describes the qubits in the second register when they are completely unacted upon by the qubits in the first register. This data show that we have essentially created a set of swap gates between the qubits in the second register along with their corresponding qubits in the first register.
 
 .. image:: QubitsUnactedUponSpinDownTargetStates.png
