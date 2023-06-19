@@ -313,5 +313,17 @@ Finally, we have the function that gives us the analytical calculation of the ch
     end
     end
 
-If we go back to the file that we presented in the beginning, we are going to see what happens when we set :math:`$iter=100$`, :math:`$iter=1000$`, and then :math:`$iter=10000$`. For :math:`$iter=100$`, we have:
+If we go back to the file that we presented in the beginning, we are going to see what happens when we set :math:`$iter=100$`, :math:`$iter=1000$`, and then :math:`$iter=10000$`. :math:`$iter$` defines how accurate we want our numerical integration to be, with a higher value indicating a more accurate calculation. For :math:`$iter=100$`, we have:
+
+.. image:: Iteris100withTemporalDisorder.png
+
+For :math:`$iter=100$`, we have:
+
+.. image:: Iteris1000withTemporalDisorder.png
+
+For :math:`$iter=10000$`, we have:
+
+.. image:: Iteris10000withTemporalDisorder.png
+
+This shows us that as we increase the accuracy of our numerical integration technique by an order of magnitude, the size of the error drops by around an order of magnitude as well. Thus we have successfully produced code that calculates the charge pumped integrated over time through analytical means, which greatly increases speed and accuracy of our calculation.
 
