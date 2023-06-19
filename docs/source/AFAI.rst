@@ -313,11 +313,11 @@ Finally, we have the function that gives us the analytical calculation of the ch
     end
     end
 
-If we go back to the file that we presented in the beginning, we are going to see what happens when we set :math:`$iter=100$`, :math:`$iter=1000$`, and then :math:`$iter=10000$`. :math:`$iter$` defines how accurate we want our numerical integration to be, with a higher value indicating a more accurate calculation. For :math:`$iter=100$`, we have:
+If we go back to the file that we presented in the beginning, we are going to see what happens when we set :math:`$iter=100$`, :math:`$iter=1000$`, and then :math:`$iter=10000$`. :math:`$iter$` defines how accurate we want our numerical integration to be, with a higher value indicating a more accurate calculation. We are also going to set our chemical potential and temporal disorder to have a strength defined by non-zero values. For :math:`$iter=100$`, we have:
 
 .. image:: Iteris100withTemporalDisorder.png
 
-For :math:`$iter=100$`, we have:
+For :math:`$iter=1000$`, we have:
 
 .. image:: Iteris1000withTemporalDisorder.png
 
