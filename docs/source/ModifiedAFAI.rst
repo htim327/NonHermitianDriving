@@ -474,3 +474,5 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
            save('Qb.mat','Qb')
        end
    end
+
+The following helper function generate the matrices that implement the chemical potential disorder when added to the Hamiltonians.
