@@ -81,7 +81,7 @@ As stated by the title, this document presents the code that shows how systems b
        title(['Probability of Occupying J-index ' num2str(i-1)],'FontSize',40,'Interpreter','latex')
    end
 
-Now to present the file :math:`\mathrm{TwoDimxyQ.m}`, which is run in the file above and is the main file that obtains all of the data for this particular analysis.
+Now to present the file :math:`$\mathrm{TwoDimxyQ.m}$`, which is run in the file above and is the main file that obtains all of the data for this particular analysis.
 
 .. code-block:: matlab
 
