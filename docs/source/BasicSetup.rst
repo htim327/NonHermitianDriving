@@ -796,6 +796,6 @@ Next, we are going to look at the case where we implement all of the operations 
 
 .. image:: NonEntropicInterferenceSpinDownTargetStates.png
 
-Finally, we have the system that describes the qubits in the second register when they are completely unacted upon by the qubits in the first register. This data show that we have essentially created a set of swap gates between the qubits in the second register along with their corresponding qubits in the first register.
+Finally, we have the system that describes the qubits in the second register when they are completely unacted upon by the qubits in the first register. This data shows that we have essentially created a set of swap gates between the qubits in the second register along with their corresponding qubits in the first register.
 
 .. image:: QubitsUnactedUponSpinDownTargetStates.png
