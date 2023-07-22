@@ -788,7 +788,7 @@ Finally, we display the data for the system that is essentially the qubits in th
 All target states in the spin down state
 ----------------------------------------
 
-For this next set of data, we are going to look at what happens when we set all of the target states into the spin down state by setting the variable :math`state` to 'b'. First we are going to look at the data for the case where our algorithm brings the qubits in the second register into the spin down state.
+For this next set of data, we are going to look at what happens when we set all of the target states into the spin down state by setting the variable :math:`state` to 'b'. First we are going to look at the data for the case where our algorithm brings the qubits in the second register into the spin down state.
 
 .. image:: EntropyEliminatedSpinDownTargetStates.png
 
