@@ -128,7 +128,7 @@ The first part of this documentation gives the main MATLAB file along with expla
        wave = kron(wave,[1; 0]);
    end
    % Create the initial state waveb, which will describe a system composed of
-   % the qubits in register that are unacted upon by the qubits in register
+   % the qubits in register two that are unacted upon by the qubits in register
    % one
    waveb = [1; 0];
    for i = 2:nqubits
