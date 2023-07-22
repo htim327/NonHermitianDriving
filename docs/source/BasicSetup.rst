@@ -11,7 +11,7 @@ The first part of this documentation gives the main MATLAB file along with expla
    % nqubits defines how many qubits are in each of the two registers
    nqubits = 4;
    % unitary determines whether the qubits in the second register are subject
-   % to unitary (they are subject to a unitary if set to 'a' as opposed to 'b') in addition to
+   % to a unitary (they are subject to a unitary if set to 'a' as opposed to 'b') in addition to
    % also being subject to noise
    unitary = 'a';
    % If state is set to 'a', then the target states of each of the qubits in
