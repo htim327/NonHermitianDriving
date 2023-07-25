@@ -68,7 +68,7 @@ We now present the code that makes up the TwoDimxyQ.m file that is run during ea
     magi = TwoDxyNoiseHamiltonians(Li,Lj,Noise);
     % Set up the Hamiltonians for your system
     [H1, H2, H3, H4, H5, V1, V3] = FastTwoDxyHamiltonians(Li,Lj,J,del);
-    % Set up the wave functions that are used for our systems
+    % Set up the wave functions that are used for our system
     W = eye(LSquared);
     wave = W(:,1:round(LSquared/2));
     rng('shuffle');
@@ -110,7 +110,7 @@ We now present the code that makes up the TwoDimxyQ.m file that is run during ea
         Unit1 = expm(-1i*(H1+diag(magi))*(1+TimeDisorder1(z+1))*2*pi/(5*iter));
         Unit3 = expm(-1i*(H3+diag(magi))*(1+TimeDisorder3(z+1))*2*pi/(5*iter));
         % Generate the matrices PMatrix1 and PMatrix3 that are used for the
-        % analytical integration of the pumped charge for the first and third
+        % analytical integration of the charge pumped for the first and third
         % driving steps
         PMatrix3 = zeros(LSquared);
         for t = 1:2:length(V1(1,:))
@@ -126,7 +126,7 @@ We now present the code that makes up the TwoDimxyQ.m file that is run during ea
             % driving steps
             P1 = P1 + ctranspose(wave2(:,s))*PMatrix1*wave2(:,s);
             P3 = P3 + ctranspose(wave3(:,s))*PMatrix3*wave3(:,s);
-            % Set up the matrices that are used for the time evolution used for
+            % Set up the wave functions that are used for the time evolution used for
             % the numerical integration
             Unit1a = eye(length(W(1,:)));
             Unit3a = eye(length(W(1,:)));
