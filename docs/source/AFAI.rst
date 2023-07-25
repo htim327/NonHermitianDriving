@@ -216,7 +216,7 @@ where for :math:`$H_1$`, :math:`$a=b=0$`, for :math:`$H_2$`, :math:`$a = -1$` an
     % y-direction, the hopping strength is given by J, and the strength of the
     % on-site potential implemented during step 5 is given by del.
     %%%
-    % Define the total number of sites that defines the system with LSquared
+    % Define the total number of sites that define the system with LSquared
     LSquared = 2*Li*Lj;
     % Initialize all of the Hamiltonians and the velocity matrices as matrices
     % of zeros
