@@ -275,7 +275,7 @@ Finally, we have the function that gives us the analytical calculation of the ch
     % period so that the computationally expensive method of numerical
     % integration is unneeded. Here, VelMat is the velocity matrix of interest,
     % u1 and u2 are the terms that define the chemical potential disorder, ti
-    % is the starting time, tf is when the driving step of interest is over, J
+    % is the starting time, tf is the stopping time, J
     % is the hopping strength, step defines whether the driving step of
     % interest is the first or third driving step, and magi is the full matrix
     % that implements the chemical potential disorder. Unfortunately, I have
