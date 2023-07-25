@@ -38,7 +38,7 @@ This file presents how the MATLAB code is set up for simulating the Anomalous Fl
    errorbar(1:length(errormat(1,:)),sum(errormat)/NTot,std(errormat)/sqrt(NTot),'LineWidth',2,'Color','m')
    title(['Error for iter=' num2str(iter)],'FontSize',40,'Interpreter','latex')
 
-We now present the code that makes up the TwoDimxyQ.m file is run during each iteration in the file above. This makes up the master-file that obtain all of the relevant data.
+We now present the code that makes up the TwoDimxyQ.m file that is run during each iteration in the file above. This makes up the master-file that obtain all of the relevant data.
 
 .. code-block:: matlab
 
