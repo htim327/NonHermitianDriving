@@ -204,7 +204,7 @@ where :math:`$\Delta$` defines the strength of the chemical potential. Meanwhile
 
 :math:`$$H_{1-4} = -J \sum_{i,j} (|i,j,1\rangle\langle i+a, j+b, 2| + h.c.)$$`
 
-where for :math:`$H_1$`, :math:`$a=b=0$`, for :math:`$H_2$`, :math:`$a = -1$` and :math:`$b = 1$`, for :math:`$H_3$` :math:`$a = -1$` and :math:`$b = 0$`, and for :math:`$H_4$`, :math:`$a = 0$` and :math:`$b = -1$`. The function that implements this is given by:
+where for :math:`$H_1$`, :math:`$a=b=0$`, for :math:`$H_2$`, :math:`$a = -1$` and :math:`$b = 1$`, for :math:`$H_3$` :math:`$a = -1$` and :math:`$b = 0$`, for :math:`$H_4$`, :math:`$a = 0$` and :math:`$b = -1$`, and :math:`$J$` defines the strength of the hopping term. The function that implements this is given by:
 
 .. code-block:: matlab
 
