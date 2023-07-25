@@ -21,7 +21,7 @@ This file presents how the MATLAB code is set up for simulating the Anomalous Fl
        tic
        % Run TwoDimxyQ
        TwoDimxyQ
-       % Load the information related to the charge pump calculated using the
+       % Load the information related to the charge pumped calculated using the
        % numerical and analytical integration approaches
        load(['QTot_' num2str(iter) '.mat'])
        % Calculate the error between the analytical and numerical integration
