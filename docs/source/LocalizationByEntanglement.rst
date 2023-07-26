@@ -483,7 +483,8 @@ Here is the helper function that generates the matrices that implement the tempo
    LSquared = 2*Li*Lj;
    % Iterate over all of the sites of the system.
    for i = 1:(LSquared)
-       % Generate a random number that is drawn between -W and W.
+       % Generate a random number that is drawn between -W and W with
+       % W being defined by chaos.
        candy = -chaos + 2*chaos*rand;
        % Use the random number to apply a random on-site potential
        ioph(i) = candy;
