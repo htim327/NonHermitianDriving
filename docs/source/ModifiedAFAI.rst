@@ -493,7 +493,8 @@ The following helper function generate the matrices that implements the chemical
     LSquared = 2*Li*Lj;
     % Iterate over all of the sites of the system.
     for i = 1:(LSquared)
-        % Generate a random number that is drawn between -W and W.
+        % Generate a random number that is drawn between -W and W where W is 
+        % given by the value of chaos.
         candy = -chaos + 2*chaos*rand;
         % Use the random number to apply a random on-site potential
         ioph(i) = candy;
