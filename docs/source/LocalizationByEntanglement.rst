@@ -92,10 +92,10 @@ Now to present the file :math:`$\mathrm{TwoDimxyQ.m}$`, which is run in the file
    % Determine how many qubits are needed to define this system
    nqubits = log2(LSquared);
    % Determine how often the state of the AFAI system is quantum entangled
-   % with the external qubit. measint = 1000 would mean that the AFAI is
-   % quantum entangled with the external qubit 1000 times per driving step
-   % whereas if measint = 1/100, then it would be entangled after 100 driving
-   % steps.
+   % with the external qubit. measint = 1000 would mean that each site of the
+   % AFAI is quantum entangled with an external qubit 1000 times per driving
+   % step whereas if measint = 1/100, then it would be entangled after 100
+   % driving steps.
    measint = 1000;
    % Determine how the code is going to run depending on whether the AFAI
    % system is going to be entangled multiple times per driving step or if it
@@ -151,7 +151,7 @@ Now to present the file :math:`$\mathrm{TwoDimxyQ.m}$`, which is run in the file
    jprobsa = zeros(1,Lj,N);
    jprobsb = zeros(1,Lj,N);
    aph = 0;
-   % Generate the matrices that store the operator that entangle the AFAI with
+   % Generate the matrices that store the operators that entangle the AFAI with
    % an external particle depending on whether a particle occupies a specific
    % site or not
    measmats = zeros(2^(ntimes*nqubits+1),2^(ntimes*nqubits+1),2*Li*Lj);
