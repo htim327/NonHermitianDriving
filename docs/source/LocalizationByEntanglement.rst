@@ -494,7 +494,7 @@ Here is the helper function that generates the matrices that implement the tempo
    magi = ioph;
    end
 
-Then there is the helper function that generates the Hamiltonians for the five driving steps as well as the velocity matrices for the first and third driving steps.
+Then there is the helper function that generates the Hamiltonians for the five driving steps as well as the velocity matrices for the first and third driving steps. The velocity matrices are not necessary for this particular study.
 
 .. code-block:: matlab
 
