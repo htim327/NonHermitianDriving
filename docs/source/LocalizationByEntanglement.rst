@@ -46,7 +46,7 @@ As stated by the title, this document presents the code that shows how systems b
        save('jprobs1.mat','jprobs1')
        save('jprobs2.mat','jprobs2')
        clearvars -except zamp PR1 PR2 jprobs1 jprobs2 NTot NTime
-       % Be continuously updated as the the progress the algorithm has made
+       % Be continuously updated as to the the progress the algorithm has made
        clc
        zamp
        toc
