@@ -9,7 +9,8 @@ This document is simply going to give you the code that used to implement the no
    clear;
    clc;
    % Generate the matrix that will store the information about the charge
-   % pumped per Floquet cycle that is obtained using the standard procedure.
+   % pumped per Floquet cycle that is obtained without the application of
+   % the non-Hermitian drive.
    QTot1 = [];
    % Generate the matrix that will store the information about the charge
    % pumped per Floquet cycle that is obtain using the non-Hermitian driving
@@ -23,7 +24,7 @@ This document is simply going to give you the code that used to implement the no
        % Run TwoDimxyQ
        TwoDimxyQ
        % Load the information about the charge pumped per Floquet cycle that
-       % is obtained using the standard procedure.
+       % is obtained without the application of the non-Hermitian drive.
        load('Q.mat')
        % Store this information in QTot1
        QTot1 = [QTot1; Q];
