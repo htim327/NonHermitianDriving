@@ -59,7 +59,7 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
    % Determine the system size
    Li = 2;
    Lj = 4;
-   % Determine the total size of the system
+   % Determine the total number of sites of the system
    LSquared = 2*Li*Lj;
    % Determine how many qubits are needed to define this system
    nqubits = log2(LSquared);
@@ -209,7 +209,7 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
            j3 = j - 1;
            i3 = i;
            % Generate the appropriate rotation matrix that transfers particles
-           % between this B site to the site directly above it
+           % between this B site to the site directly below it
            ind1 = [2 i3 j3];
            ind2 = [1 i j];
            [rotmat,measmat] = PresenceRevealed2(Li,Lj,ntimes,ind1,ind2);
@@ -221,13 +221,13 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
            [rotmat,measmat] = PresenceRevealed2(Li,Lj,ntimes,ind1,ind2);
            rotmats(:,:,aph,6) = rotmat;
            % Transfer particles between this site and the site directly to the
-           % left of it
+           % right of it
            ind1 = [2 i3 j3];
            i2 = mod(i3+1,Li);
            ind2 = [1 i2 j3];
            [rotmat,measmat] = PresenceRevealed2(Li,Lj,ntimes,ind1,ind2);
            rotmats(:,:,aph,7) = rotmat;
-           % Transfer particles between this site and the site directly below it
+           % Transfer particles between this site and the site directly above it
            j2 = j3-1;
            i2 = mod(i3+1,Li);
            ind1 = [2 i3 j3];
@@ -266,7 +266,7 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
            [rotmat,measmat] = PresenceRevealed2(Li,Lj,ntimes,ind1,ind2);
            rotmats(:,:,aph,3) = rotmat;
            % Calculate the rotation matrix that transfers particles directly
-           % above ind1 = [2 i j];
+           % below ind1 = [2 i j];
            j2 = j + 1;
            if j2>(Lj-1)
                rotmats(:,:,aph,4) = eye(2^(nqubits));
@@ -299,7 +299,7 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
            ind2 = [2 i2 j3];
            [rotmat,measmat] = PresenceRevealed2(Li,Lj,ntimes,ind1,ind2);
            rotmats(:,:,aph,7) = rotmat;
-           % Produce the rotation matrix for pushing particles up from this
+           % Produce the rotation matrix for pushing particles up above this
            % site
            ind1 = [1 i3 j3];
            j2 = j3-1;
