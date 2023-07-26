@@ -614,6 +614,124 @@ This is the helper function that generates the velocity matrices (for both the f
     end
     end
 
+The following helper function generates the matrices :math:`measmats` and :math:`rotmats` that are used to flip the external qubit depending on the number of present at the sites of interest and to move particles between sites, respectively.
+
+.. code-block:: matlab
+
+    function [rotmat,measmat] = PresenceRevealed2(Li,Lj,ntimes,ind1,ind2)
+    % Determine how many qubits are needed to describe the AFAI system with a
+    % single particle
+    nqubits = ceil(log2(2*Li*Lj));
+    % Generate the matrix rotations
+    rotations = zeros(2*Li*Lj);
+    % Generate refmat1, which will be used to keep all particles not
+    % located at the two sites of interest at the same location, within
+    % the matrix rotations
+    refmat1 = eye(2^nqubits);
+    % Generate refmat5 which will be used to cause the matrix measmat to
+    % perform the appropriate operations when particles are not located at the
+    % two sites of interest
+    refmat5 = eye(2^nqubits);
+    % Generate refmat2 which will be used to cause the matrix measmat to
+    % perform the appropriate operations when particles are located at the site
+    % where we want to push particles to
+    refmat2 = zeros(2^nqubits);
+    % Generate refmat3 which will be used to transform particles between the
+    % two sites of interest within rotations
+    refmat3 = zeros(2^nqubits);
+    % Generate refmat4 which will be used to cause the matrix measmat to
+    % perform the appropriate operations when particles are located at the site
+    % where we want to push particles away from
+    refmat4 = zeros(2^nqubits);
+    % Find the index within the wave function of the site that we want to push
+    % particles away from
+    refind1 = ind1(1)+2*ind1(2)+2*Li*ind1(3);
+    % Find the index within the wave function of the site that we want to push
+    % particles to
+    refind2 = ind2(1)+2*ind2(2)+2*Li*ind2(3);
+    % Set the two positions within refmat1 that correspond to the two sites of
+    % interest to zero
+    refmat1(refind1,refind1) = 0;
+    refmat1(refind2,refind2) = 0;
+    % Set the location within refmat2 corresponding to the site where we want
+    % to push particles to 1
+    refmat2(refind2,refind2) = 1;
+    % Populate refmat3 such that it successfully transfers particles between
+    % the two sites of interest
+    refmat3(refind1,refind2) = 1;
+    refmat3(refind2,refind1) = 1;
+    % Set the location within refmat4 corresponding to the site where we want
+    % to push particles away from to 1
+    refmat4(refind1,refind1) = 1;
+    % Set the two positions within refmat5 corresponding to the two sites of
+    % interest to zero
+    refmat5(refind1,refind1) = 0;
+    refmat5(refind2,refind2) = 0;
+    % Generate rotations from refmat1 and refmat3
+    rotations = rotations + refmat1 + refmat3;
+    % Generate the matrix that will later be used to form the matrix measmat
+    measmati = zeros(2^(ntimes*nqubits+1),2^(ntimes*nqubits+1));
+    % Iterate over all possible combinations of refmat2, refmat4, and refmat5
+    % that could possibly describe our system given the number of particles
+    % that compose the system
+    for i = 0:(3^ntimes-1)
+        % Convert the current iteration into trinary
+        const = dec2base(i,3);
+        const2 = ntimes - length(const);
+        for j = 1:const2
+            const = ['0' const];
+        end
+        % count1 determines how many particles are located at the site that we
+        % want to push particles away from
+        count1 = 0;
+        % count2 determines how many particles are located at the site that we
+        % want to push particles to
+        count2 = 0;
+        % Determine whether refmat2, refmat4, or refmat5 will be the first
+        % matrix that forms the Kronecker product for the current iteration
+        % depending on the value for the first entry of const
+        if (const(1)=='1')
+            refmatnow = refmat4;
+            count1 = count1 + 1;
+        elseif (const(1)=='2')
+            refmatnow = refmat2;
+            count2 = count2 + 1;
+        else
+            refmatnow = refmat5;
+        end
+        % Determine the rest of the matrices that form the Kronecker product
+        % for the current iteration
+        for j = 2:length(const)
+            if (const(j)=='1')
+                refmatnow = kron(refmatnow,refmat4);
+                count1 = count1 + 1;
+            elseif (const(j)=='2')
+                refmatnow = kron(refmatnow,refmat2);
+                count2 = count2 + 1;
+            else
+                refmatnow = kron(refmatnow,refmat5);
+            end
+        end
+        % If more particles are located at the site where we want to push
+        % particles away from compared to the site where we want to push
+        % particles to, make a Kronecker product between refmatnow and the
+        % Pauli-x matrix and add the resulting matrix to measmati
+        if count1>count2
+            measmati = measmati + kron(refmatnow,[0 1; 1 0]);
+        % If more particles are located at the site where we want to push
+        % particles to compared to the site where we want to push
+        % particles away from or an equal number of particles are located
+        % at both sites, make a Kronecker product between refmatnow and the
+        % identity matrix and add the resulting matrix to measmati
+        else
+            measmati = measmati + kron(refmatnow,[1 0; 0 1]);
+        end
+    end
+    % Return measmat and rotmat
+    measmat = measmati;
+    rotmat = rotations;
+    end
+
 Finally, we have the helper function that calculates the reduced density matrix given an input matrix as well as some target qubits that will define the reduced density matrix.
 
 .. code-block:: matlab
