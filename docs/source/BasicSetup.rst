@@ -186,7 +186,7 @@ The first part of this documentation gives the main MATLAB file along with expla
        % Add this von Neumann entropy to firstent
        firstent = firstent + entropy;
    end
-   % Iterate through all of the qubits in the secon register
+   % Iterate through all of the qubits in the second register
    for i = (nqubits+1):(2*nqubits)
        % Calculate the reduced density matrix for the ith qubit
        rdensity = ReducedDensity(density,2*nqubits,i);
