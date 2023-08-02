@@ -681,7 +681,7 @@ The following code produces the correction unitary.
     % the second register to the target state. densityi is the density matrix
     % that we wish to apply the correction unitary to, nqubits is the number of
     % qubits that compose the system described by this density matrix, and
-    % rotation describe the set of rotations that are applied to the qubits in
+    % rotation describes the set of rotations that are applied to the qubits in
     % the second register.
     cormat = zeros(2^(2*nqubits),2^(2*nqubits));
     % Iterate over all possible configurations that the qubits in the first
