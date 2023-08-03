@@ -418,7 +418,7 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
                density = (1-gamma)*eye(2^(ntimes*nqubits))*density*ctranspose(eye(2^(ntimes*nqubits))) + gamma*matnow*density*ctranspose(matnow);
            end
            % Apply noise to the two sites of interest that transfers particles
-           % from these two sites to the four sites that surround each othe
+           % from these two sites to the four sites that surround each of
            % these two sites
            densityb = (1-num2*gamma2)*eye(2^(ntimes*nqubits))*density*ctranspose(eye(2^(ntimes*nqubits)));
            for s1 = 1:num2
