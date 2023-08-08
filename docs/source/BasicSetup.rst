@@ -777,7 +777,7 @@ The image below displays the results for the system where the target state is re
 
 .. image:: EntropyEliminatedRandomTargetStates.png
 
-Next, we have the system that is the exact same as that of the previous image except for the implementation of the correction unitary. The interesting aspect for this data is that the entropy of both of the registers is higher than the entropy of the first register in the image above and both of the entropies are exactly the same. It makes sense that both the entropies would be exactly the same because the information stored in the first register is required to eliminate the entropy in the second register, which is why the mystical sounding term 'entropic interference' is used.
+Next, we have the system that is the exact same as that of the previous image except for the implementation of the correction unitary, which is not used for the following set of data. The interesting aspect for this data is that the entropy of both of the registers is higher than the entropy of the first register in the image above and both of the entropies are exactly the same. It makes sense that both the entropies would be exactly the same because the information stored in the first register is required to eliminate the entropy in the second register, which is why the mystical sounding term 'entropic interference' is used.
 
 .. image:: NonEntropicInterferenceRandomTargetStates.png
 
