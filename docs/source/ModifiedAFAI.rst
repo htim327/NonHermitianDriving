@@ -13,7 +13,7 @@ This document is simply going to give you the code that used to implement the no
    % the non-Hermitian drive.
    QTot1 = [];
    % Generate the matrix that will store the information about the charge
-   % pumped per Floquet cycle that is obtain using the non-Hermitian driving
+   % pumped per Floquet cycle that is obtained using the non-Hermitian driving
    % methods
    QTot2 = [];
    % Determine the number of noise realizations you want to use
@@ -172,7 +172,7 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
            % calculate measmat which determines how many particles are located
            % at this site vs. how many particles are located at the site above
            % that one. Also calculate the rotation matrix that transfers
-           % particles between these to sites.
+           % particles between these two sites.
            ind1 = [1 i j];
            ind2 = [2 i (j-1)];
            [rotmat,measmat] = PresenceRevealed2(Li,Lj,ntimes,ind1,ind2);
@@ -245,7 +245,7 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
            % calculate measmat which determines how many particles are located
            % at this site vs. how many particles are located at the site above
            % that one. Also calculate the rotation matrix that transfers
-           % particles between these to sites.
+           % particles between these two sites.
            i2 = mod(i+1,Li);
            ind1 = [2 i j];
            ind2 = [1 i2 (j-1)];
@@ -476,7 +476,7 @@ Now the file :math:`$\mathrm{TwoDimxyQ.m}$` is presented.
        end
    end
 
-The following helper function generate the matrices that implements the chemical potential disorder when added to the Hamiltonians.
+The following helper function generates the matrices that implement the chemical potential disorder when added to the Hamiltonians.
 
 .. code-block:: matlab
 
@@ -614,7 +614,7 @@ This is the helper function that generates the velocity matrices (for both the f
     end
     end
 
-The following helper function generates the matrices :math:`measmats` and :math:`rotmats` that are used to flip the external qubit depending on the number of present at the sites of interest and to move particles between sites, respectively.
+The following helper function generates the matrices :math:`measmats` and :math:`rotmats` that are used to flip the external qubit depending on the number of particles present at the sites of interest and to move particles between sites, respectively.
 
 .. code-block:: matlab
 
