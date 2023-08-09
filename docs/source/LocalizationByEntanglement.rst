@@ -162,7 +162,7 @@ Now to present the file :math:`$\mathrm{TwoDimxyQ.m}$`, which is run in the file
            % locmat is the matrix that is populated corresponding to the site
            % of interest
            locmat = zeros(2^(ntimes*nqubits),2^(ntimes*nqubits));
-           % notlocmat has every site populate except for the site of interest
+           % notlocmat has every site populated except for the site of interest
            notlocmat = eye(2^(ntimes*nqubits),2^(ntimes*nqubits));
            % Make the entry of locmat corresponding to the site of interest 1
            locmat(1+2*i+2*Li*j,1+2*i+2*Li*j) = 1;
@@ -170,13 +170,13 @@ Now to present the file :math:`$\mathrm{TwoDimxyQ.m}$`, which is run in the file
            % 0
            notlocmat(1+2*i+2*Li*j,1+2*i+2*Li*j) = 0;
            % Have the external particle flip its spin if the site of interest
-           % is populate, otherwise do not flip the spin
+           % is populated, otherwise do not flip the spin
            measmats(:,:,aph) = measmats(:,:,aph) + kron(locmat,[0 1; 1 0]) + kron(notlocmat,[1 0; 0 1]);
            aph = aph + 1;
            % locmat is the matrix that is populated corresponding to the site
            % of interest
            locmat = zeros(2^(ntimes*nqubits),2^(ntimes*nqubits));
-           % notlocmat has every site populate except for the site of interest
+           % notlocmat has every site populated except for the site of interest
            notlocmat = eye(2^(ntimes*nqubits),2^(ntimes*nqubits));
            % Make the entry of locmat corresponding to the site of interest 1
            locmat(2+2*i+2*Li*j,2+2*i+2*Li*j) = 1;
@@ -184,7 +184,7 @@ Now to present the file :math:`$\mathrm{TwoDimxyQ.m}$`, which is run in the file
            % 0
            notlocmat(2+2*i+2*Li*j,2+2*i+2*Li*j) = 0;
            % Have the external particle flip its spin if the site of interest
-           % is populate, otherwise do not flip the spin
+           % is populated, otherwise do not flip the spin
            measmats(:,:,aph) = measmats(:,:,aph) + kron(locmat,[0 1; 1 0]) + kron(notlocmat,[1 0; 0 1]);
        end
    end
