@@ -560,7 +560,9 @@ For the helper functions, we will start with the function that obtains vectors t
     function [orthvec] = FindOrths(initorth,num)
     % This algorithm produces a set of orthogonal vectors using the
     % Gram–Schmidt process. initorth is set of pre-generated
-    % vectors, which can also be a completely empty vector if you don't have any use for any pre-generated vectors. num is the number of orthogonal vectors you wish to produce.
+    % vectors, which can also be a completely empty vector if you
+    % don't have any use for any pre-generated vectors. num is the
+    % number of orthogonal vectors you wish to produce.
     %%%
     % initnum describes how many vectors make up initorth
     initnum = size(initorth,2);
