@@ -146,7 +146,7 @@ Now to present the file :math:`$\mathrm{TwoDimxyQ.m}$`, which is run in the file
    % Generate the vectors that store information about the participation ratio
    PRveca = [];
    PRvecb = [];
-   % Generate the vectors that store information about the probability the the
+   % Generate the vectors that store information about the probability of the
    % particles occupying each j-index
    jprobsa = zeros(1,Lj,N);
    jprobsb = zeros(1,Lj,N);
